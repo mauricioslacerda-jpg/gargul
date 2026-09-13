@@ -120,9 +120,14 @@
   .seg button[aria-pressed="true"] { background: var(--gold-fill); color: var(--gold-ink); }
   .seg-roda { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; margin: 0; border-color: var(--rule); flex: 1 1 100%; }
   header.top .seg-roda { max-width: 44rem; }
-  .seg-idioma { flex: 0 0 auto; border-color: var(--rule); }
-  .seg-idioma button { min-height: 2.75rem; min-width: 3.2rem; padding: 0.4rem 0.8rem; font-family: var(--f-app); font-size: 0.72rem; letter-spacing: 0.14em; }
-  @media (max-width: 700px) { .seg-idioma { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); } }
+  .brand { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.4rem 1rem; }
+  .brand .eyebrow { flex: 1 1 100%; }
+  .seg-idioma { flex: 0 0 auto; border-color: var(--rule); align-self: center; }
+  .seg-idioma button { min-height: 2rem; min-width: 2.5rem; padding: 0.25rem 0.55rem; font-family: var(--f-app); font-size: 0.64rem; letter-spacing: 0.12em; }
+  /* o título não quebra por causa dos glifos: nome inteiro numa linha, hebraico compacto, glifos menores */
+  h1 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.7rem; white-space: nowrap; }
+  h1 .heb { white-space: nowrap; }
+  h1 .heb svg.hx-g { width: 0.62em !important; height: 0.62em !important; margin: 0 0.03em; vertical-align: -0.05em; }
   .seg-roda button { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; padding: 0.5rem 0.3rem; min-height: 3rem; text-transform: none; letter-spacing: 0; }
   .seg-roda button b { font-family: var(--f-heb); font-weight: 500; font-size: 0.95rem; }
   .seg-roda button small { font-family: var(--f-app); font-size: 0.7rem; letter-spacing: 0.06em; opacity: 0.85; }
@@ -431,8 +436,9 @@
     /* cabeçalho de aplicativo: uma linha de marca, uma linha de controles */
     header.top { gap: 0.5rem; padding-bottom: 0.6rem; margin-bottom: 0.9rem; }
     .brand .eyebrow { display: none; }
-    h1 { font-size: 1.35rem; display: flex; align-items: baseline; gap: 0.6rem; }
-    h1 .heb { display: inline; margin: 0; font-size: 0.9em; }
+    h1 { font-size: 1.35rem; gap: 0.3rem 0.5rem; }
+    h1 .heb { display: inline; margin: 0; font-size: 0.85em; }
+    .brand { gap: 0.3rem 0.6rem; }
     .controls { width: 100%; display: flex; flex-wrap: nowrap; gap: 0.4rem; align-items: stretch; }
     .controls label:first-child { flex: 1 1 auto; min-width: 0; }
     .controls label:first-child input { flex: 1 1 auto; width: 100%; min-width: 0; min-height: 2.75rem; padding: 0.3rem 0.4rem; }
@@ -496,16 +502,16 @@
     <div class="brand">
       <p class="eyebrow" data-i18n="s128">Keter · Netzach · skill roda-do-tempo · recensão Gra · hemisfério Sul</p>
       <h1 data-i18n="s127">Roda do Tempo <span class="heb">גַּלְגַּל הַזְּמַן</span></h1>
+      <div class="seg seg-idioma" role="radiogroup" aria-label="Idioma" id="idioma">
+        <button type="button" data-lang="pt" aria-pressed="false" lang="pt">PT</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
+      </div>
     </div>
     <div class="controls" role="group" aria-label="Data da leitura">
       <label><span class="txt-longo" data-i18n="s126">data </span><input type="date" id="date"></label>
       <label><input type="checkbox" id="after18"> <span data-i18n="after18">após 18h</span><span class="txt-longo" data-i18n="s125"> (o dia hebraico já virou)</span></label>
       <button class="btn" id="today" type="button" data-i18n="s124">hoje</button>
-    </div>
-    <div class="seg seg-idioma" role="radiogroup" aria-label="Idioma" id="idioma">
-      <button type="button" data-lang="pt" aria-pressed="false" lang="pt">PT</button>
-      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
-      <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
     </div>
     <div class="seg seg-roda" role="radiogroup" aria-label="Escrita das letras" id="escrita">
       <button type="button" data-esc="hebraico" aria-pressed="true" data-i18n="s123"><b>Hebraico</b><small>ktav Ashuri</small></button>
@@ -1755,7 +1761,7 @@
 </script>
 
 <script>
-  /* Gargul v4.1.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  /* Gargul v4.1.1 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
     var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });

@@ -1,7 +1,7 @@
-/* Gargul v4.1.0 — service worker
+/* Gargul v4.1.1 — service worker
    cache-first para o app (index, manifest, ícones); as fontes do Google entram no cache na primeira
    visita e passam a servir sem rede (stale-while-revalidate). Mude CACHE ao publicar uma versão nova. */
-var CACHE = "gargul-v4.1.0";
+var CACHE = "gargul-v4.1.1";
 var APP = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(APP); }).then(function () { return self.skipWaiting(); }));

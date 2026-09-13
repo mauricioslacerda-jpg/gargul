@@ -78,6 +78,8 @@ Datas em horário do Rio. Fontes e réguas: `specs/cabala-app/` no vault.
 - **v4.5.2** — seletores do menu quebram linha em vez de cortar (letra maior, telas estreitas).
 - **v4.6.0** — o tamanho da letra escala **só o texto corrido** (`--tx`); cabeçalho, abas, botões, títulos e
   desenhos ficam no tamanho; título e abas nunca cortam.
+- **v4.7.0** — tamanho **Menor** (90 %); **Imprimir · PDF** na ⚙ (as cinco vistas, seções abertas, papel claro,
+  quebra de página por vista); colapso corrigido — cada seção fecha e abre sozinha, sem levar as seguintes.
 
 ## O que fica em português por decisão
 

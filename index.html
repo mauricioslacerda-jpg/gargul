@@ -268,7 +268,12 @@
   .arvore-svg svg { width: 100%; height: auto; display: block; color: var(--ink); }
   .arvore-nota { grid-column: 1 / -1; margin-top: 0.4rem; max-width: 80ch; }
   .arvore-svg .mundo-lbl text, .arvore-svg .veu-lbl text { text-transform: uppercase; }
-  .arvore-svg .almas text { paint-order: stroke; stroke: var(--ground); stroke-width: 3px; stroke-linejoin: round; }
+  .arvore-svg .almas text { paint-order: stroke; stroke: var(--ground); stroke-width: 3px; stroke-linejoin: round; cursor: pointer; }
+  .arvore-svg .alvos rect { cursor: pointer; outline: none; }
+  .arvore-svg .alvos rect:hover { fill: color-mix(in srgb, var(--gold) 12%, transparent); }
+  .arvore-svg .mundos circle.ativo { fill-opacity: 0.2; stroke-opacity: 1; stroke-width: 1.6; }
+  .arvore-svg .veus line.ativo { stroke-opacity: 1; stroke-width: 1.8; stroke-dasharray: 5 3; }
+  .arvore-svg .almas text.ativo { font-weight: 700; fill: var(--ink); }
   .arvore-svg .alvos circle { cursor: pointer; outline: none; }
   .arvore-svg .alvos circle:hover { fill: color-mix(in srgb, var(--gold) 15%, transparent); }
   .arvore-svg .no { transition: fill 0.15s ease; }
@@ -526,10 +531,10 @@
       <!-- os quatro mundos, como na imagem da Academia de Cabala (13/09/2026): Atzilut envolve Keter; Beriah, Chochmah e Binah;
            Yetzirah, de Chesed a Yesod; Asiyah, Malchut. No Ari cada mundo contém as dez: este é o mapa por altura, declarado. -->
       <g class="mundos" fill="var(--gold)" stroke="var(--gold)" stroke-opacity="0.35" stroke-width="0.8">
-        <circle cx="200" cy="66"  r="50"  fill-opacity="0.09"/>
-        <circle cx="200" cy="128" r="104" fill-opacity="0.05"/>
-        <circle cx="200" cy="288" r="118" fill-opacity="0.05"/>
-        <circle cx="200" cy="415" r="30"  fill-opacity="0.10"/>
+        <circle data-sef="m-atzilut"  cx="200" cy="66"  r="50"  fill-opacity="0.09"/>
+        <circle data-sef="m-beriah"   cx="200" cy="128" r="104" fill-opacity="0.05"/>
+        <circle data-sef="m-yetzirah" cx="200" cy="288" r="118" fill-opacity="0.05"/>
+        <circle data-sef="m-asiyah"   cx="200" cy="415" r="30"  fill-opacity="0.10"/>
       </g>
       <g class="mundo-lbl" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--gold)" letter-spacing="0.08">
         <text x="4"   y="30"  text-anchor="start">TIBEL HaPIR</text><text x="4" y="41" font-size="8" fill="var(--ink-3)">Atzilut · אצילות · י</text>
@@ -539,9 +544,9 @@
       </g>
       <!-- os véus: a parsa (פרסא) entre um mundo e o seguinte -->
       <g class="veus" stroke="var(--gold)" stroke-opacity="0.55" stroke-width="0.9" stroke-dasharray="3 4" fill="none">
-        <line x1="60"  y1="93"  x2="340" y2="93"/>
-        <line x1="40"  y1="188" x2="360" y2="188"/>
-        <line x1="90"  y1="391" x2="310" y2="391"/>
+        <line data-sef="v-1" x1="60"  y1="93"  x2="340" y2="93"/>
+        <line data-sef="v-2" x1="40"  y1="188" x2="360" y2="188"/>
+        <line data-sef="v-3" x1="90"  y1="391" x2="310" y2="391"/>
       </g>
       <g class="veu-lbl" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--gold)" fill-opacity="0.9" text-anchor="end">
         <text x="340" y="90">véu · פרסא</text>
@@ -621,13 +626,28 @@
 
       <!-- os cinco níveis da alma, NRNHY, na sefirá que a tradição lhes dá (Zohar; Bahir; dossiê do Kav) -->
       <g class="almas" font-family="Frank Ruhl Libre, Cardo, serif" font-size="9.5" font-style="italic" fill="var(--gold)">
-        <text x="176" y="72"  text-anchor="end">Yehadá · יחידה</text>
-        <text x="308" y="136" text-anchor="start">Hawê · חיה</text>
-        <text x="92"  y="136" text-anchor="end">Nishimta · נשמה</text>
-        <text x="176" y="264" text-anchor="end">Ruk’ha · רוח</text>
-        <text x="176" y="419" text-anchor="end">Nafsha · נפש</text>
+        <text data-sef="a-yechidah" x="176" y="72"  text-anchor="end">Yehadá · יחידה</text>
+        <text data-sef="a-chayah"   x="308" y="136" text-anchor="start">Hawê · חיה</text>
+        <text data-sef="a-neshamah" x="92"  y="136" text-anchor="end">Nishimta · נשמה</text>
+        <text data-sef="a-ruach"    x="176" y="264" text-anchor="end">Ruk’ha · רוח</text>
+        <text data-sef="a-nefesh"   x="176" y="419" text-anchor="end">Nafsha · נפש</text>
       </g>
-      <g class="alvos" fill="transparent" stroke="none">
+      <g class="alvos alvos-x" fill="transparent" stroke="none">
+        <!-- mundos: os rótulos das bordas -->
+        <rect data-sef="m-atzilut"  x="0"   y="18"  width="96"  height="28" rx="4" tabindex="0" role="button" aria-label="Tibel HaPir, Atzilut"/>
+        <rect data-sef="m-beriah"   x="300" y="156" width="100" height="28" rx="4" tabindex="0" role="button" aria-label="Tibel HaBará, Beriah"/>
+        <rect data-sef="m-yetzirah" x="0"   y="272" width="104" height="28" rx="4" tabindex="0" role="button" aria-label="Tibel HaYossará, Yetzirah"/>
+        <rect data-sef="m-asiyah"   x="300" y="392" width="100" height="28" rx="4" tabindex="0" role="button" aria-label="Tibel HaAssá, Asiyah"/>
+        <!-- véus: a faixa de cada parsa -->
+        <rect data-sef="v-1" x="60" y="84"  width="280" height="16" tabindex="0" role="button" aria-label="véu entre Atzilut e Beriah"/>
+        <rect data-sef="v-2" x="40" y="179" width="320" height="16" tabindex="0" role="button" aria-label="véu entre Beriah e Yetzirah"/>
+        <rect data-sef="v-3" x="90" y="382" width="220" height="16" tabindex="0" role="button" aria-label="véu entre Yetzirah e Asiyah"/>
+        <!-- almas: os rótulos -->
+        <rect data-sef="a-yechidah" x="104" y="62"  width="74" height="14" tabindex="0" role="button" aria-label="Yechidah"/>
+        <rect data-sef="a-chayah"   x="306" y="126" width="60" height="14" tabindex="0" role="button" aria-label="Chayah"/>
+        <rect data-sef="a-neshamah" x="20"  y="126" width="74" height="14" tabindex="0" role="button" aria-label="Neshamah"/>
+        <rect data-sef="a-ruach"    x="112" y="254" width="66" height="14" tabindex="0" role="button" aria-label="Ruach"/>
+        <rect data-sef="a-nefesh"   x="112" y="409" width="66" height="14" tabindex="0" role="button" aria-label="Nefesh"/>
         <circle data-sef="tzimtzum" cx="200" cy="22"  r="22" tabindex="0" role="button" aria-label="Tzimtzum — a contração, fora da Árvore"/>
         <circle data-sef="keter"    cx="200" cy="68"  r="30" tabindex="0" role="button" aria-label="Keter — a coroa"/>
         <circle data-sef="chochmah" cx="286" cy="118" r="30" tabindex="0" role="button" aria-label="Chochmah — a sabedoria"/>
@@ -643,7 +663,7 @@
       </g>
     </svg></div>
     <div class="ap" id="arvore-painel" aria-live="polite"><p class="ap-vazio">Toque numa esfera.</p></div>
-    <p class="sub-sec arvore-nota"><b>Mundos, véus e almas (13/09/2026).</b> Os quatro mundos com o nome aramaico da casa — <i>Tibel HaPir</i> (Atzilut, א), <i>HaBará</i> (Beriah), <i>HaYossará</i> (Yetzirah), <i>HaAssá</i> (Asiyah) — e a letra do Nome que os chaveia (י ה ו ה; Hitlamdut fólio IV: <i>Tibel HaPir = Atziluth = Yod</i>); entre um mundo e o seguinte, o <b>véu</b>, a <i>parsa</i> (פרסא) do Ari; os cinco níveis da alma no lugar que o Zohar lhes dá — <i>Nafsha</i> em Malchut, <i>Ruk’ha</i> em Tiferet, <i>Nishimta</i> em Binah, <i>Hawê</i> em Chochmah, <i>Yehadá</i> em Keter (NRNHY; Bahir, Zohar e o dossiê do Kav no vault). O <b>mapa por altura</b> (Atzilut em Keter; Beriah em Chochmah e Binah; Yetzirah de Chesed a Yesod; Asiyah em Malchut) segue a imagem da Academia de Cabala que ele enviou; no Ari cada mundo contém as dez sefirot inteiras — as duas leituras coexistem e esta página declara qual desenha.</p>
+    <p class="sub-sec arvore-nota"><b>Mundos, véus e almas (13/09/2026).</b> Os quatro mundos com o nome aramaico da casa — <i>Tibel HaPir</i> (Atzilut, א), <i>HaBará</i> (Beriah), <i>HaYossará</i> (Yetzirah), <i>HaAssá</i> (Asiyah) — e a letra do Nome que os chaveia (י ה ו ה; Hitlamdut fólio IV: <i>Tibel HaPir = Atziluth = Yod</i>); entre um mundo e o seguinte, o <b>véu</b>, a <i>parsa</i> (פרסא) do Ari; os cinco níveis da alma no lugar que a casa lhes dá — <i>Nafsha</i> em Malchut, <i>Ruk’ha</i> em <b>Zeir Anpin</b> (as seis do meio; o rótulo fica em Tiferet), <i>Nishimta</i> em Binah, <i>Hawê</i> em Chochmah, <i>Yehadá</i> em Keter (NRNHY; Bahir, Zohar e o dossiê do Kav; decisão do Gatekeeper de 22/08/2026). <b>Toque num mundo, num véu ou numa alma</b> para ler o painel, com o nome em português, hebraico e aramaico e a fonte. O <b>mapa por altura</b> (Atzilut em Keter; Beriah em Chochmah e Binah; Yetzirah de Chesed a Yesod; Asiyah em Malchut) segue a imagem da Academia de Cabala que ele enviou; no Ari cada mundo contém as dez sefirot inteiras — as duas leituras coexistem e esta página declara qual desenha.</p>
   </section>
 
   <h2 class="sec"><span class="n">8</span>As 22 letras <span class="eyebrow">tábua · valor · quatro escritas</span></h2>
@@ -1248,20 +1268,72 @@
       meta: "<b>pilar</b> equilíbrio · <b>natureza</b> manifestação · <b>tipo</b> operação, negócio, checklist · <b>Roda</b> Shabbat · ano 7/7" }
   };
 
-  var ORDEM = ["tzimtzum", "keter", "chochmah", "binah", "daat", "chesed", "gevurah", "tiferet", "netzach", "hod", "yesod", "malkuth"];
+  /* mundos, véus e almas — Hitlamdut fólios IV e V (lidos em 13/09/2026); nomes aramaicos da casa e da imagem da Academia de Cabala */
+  var SEF_X = {
+    "m-atzilut": { nome: "Atzilut · Emanação", heb: "אֲצִילוּת", aram: "Tibel HaPir · עולם האצילות · letra י do Nome",
+      cabala: "<p>Um <em>olam</em> não é um lugar: a palavra tem a raiz de <em>he’elem</em>, ocultação — <strong>um mundo é um grau de ocultação da mesma luz</strong>. Em Atzilut as dez luzes ainda são uma; é o mundo da emanação, o mais alto e o de menor volume. O pergaminho aprovado da casa chaveia os quatro mundos pelo Tetragrama: <em>Tibel HaPir = Atziluth = Yod</em>.</p>",
+      sistema: "<p>A intenção e o runbook. <strong>Se corromper, perde-se tudo</strong>, porque nada mais se regenera: cabe em poucos kilobytes e é o único ninho insubstituível (Hitlamdut, fólio V, a arca de Bereshit 6:14, cada espécie no seu ninho).</p>",
+      meta: "<b>português</b> emanação · <b>hebraico</b> atzilut · <b>aramaico</b> Tibel HaPir · <b>no desenho</b> envolve Keter (mapa por altura da imagem enviada; no Ari cada mundo contém as dez) · <b>fonte</b> Hitlamdut IV e V" },
+    "m-beriah": { nome: "Beriah · Criação", heb: "בְּרִיאָה", aram: "Tibel HaBará · עולם הבריאה · letra ה do Nome",
+      cabala: "<p>O mundo da criação: a primeira separação, <em>algo a partir do nada</em> (<em>bará</em>, o verbo de Gênesis 1:1). Abaixo do véu de Atzilut a luz já é outra coisa que a fonte. Aqui a tradição põe o Trono e as almas mais altas.</p>",
+      sistema: "<p>As leis, os ADRs, a arquitetura. <strong>Se corromper, perde-se o porquê da forma.</strong> É a altura em que a pergunta “Chayah e Yechidah existem?” respondeu <em>não existem</em>: nenhum ADR, nada vinculante — resposta correta na sua altura, e falsa se viajar sem dizer de onde fala (fólio V).</p>",
+      meta: "<b>português</b> criação · <b>hebraico</b> beriah · <b>aramaico</b> Tibel HaBará · <b>no desenho</b> envolve Chochmah e Binah · <b>fonte</b> Hitlamdut IV e V" },
+    "m-yetzirah": { nome: "Yetzirah · Formação", heb: "יְצִירָה", aram: "Tibel HaYossará · עולם היצירה · letra ו do Nome",
+      cabala: "<p>O mundo da formação — <em>yatzar</em>, dar forma, o verbo do oleiro em Gênesis 2:7. É o mundo dos anjos e o nome do livro que rege esta página: o <em>Sefer Yetzirah</em> projeta cada letra em três eixos, <em>Olam · Shana · Nefesh</em>, mundo, ano e alma.</p>",
+      sistema: "<p>A configuração, as sessões, as chaves. <strong>Se corromper, perde-se a forma — mas se refaz pelo how-to.</strong> Na pergunta do rito: <em>existem, não validados</em> (os arquivos estão lá, sem selo de promoção).</p>",
+      meta: "<b>português</b> formação · <b>hebraico</b> yetzirah · <b>aramaico</b> Tibel HaYossará · <b>no desenho</b> de Chesed a Yesod · <b>fonte</b> Hitlamdut IV e V; Sefer Yetzirah" },
+    "m-asiyah": { nome: "Asiyah · Ação", heb: "עֲשִׂיָּה", aram: "Tibel HaAssá · עולם העשייה · letra ה final do Nome",
+      cabala: "<p>O mundo da ação, o mais coberto e o mais concreto — o nosso. Descer até aqui não é mudar de sala: é a mesma luz ficando mais coberta e mais concreta ao mesmo tempo. Pelo Zohar (Bereshit 46b, citado no Pardes 30:8), é em Malchut que as contas e as gematrias pendem.</p>",
+      sistema: "<p>Os bytes: prosa, código, dados. <strong>Se corromper, perde-se o feito.</strong> Na pergunta do rito: <em>existem</em>, três arquivos com número de linha — a altura mais baixa, a que o ouvinte assume quando ninguém declara de onde fala.</p>",
+      meta: "<b>português</b> ação · <b>hebraico</b> asiyah (a casa escreve Assiah) · <b>aramaico</b> Tibel HaAssá · <b>no desenho</b> envolve Malchut · <b>fonte</b> Hitlamdut V" },
+    "v-1": { nome: "Véu · a parsa", heb: "פַּרְסָא", aram: "entre Atzilut e Beriah · também מסך, masach",
+      cabala: "<p>Entre um mundo e o seguinte a tradição do Ari põe um <strong>véu</strong> — a <em>parsa</em> (פרסא, cortina; em Cordovero e no Ari também <em>masach</em>, tela): a luz atravessa, mas coberta, e o que era um passa a ser outro. É o que faz de quatro mundos <em>quatro</em>, e não um só gradiente. O primeiro véu, abaixo de Atzilut, é o mais denso: acima dele as dez luzes ainda são uma.</p>",
+      sistema: "<p>No sistema, o véu é a <strong>declaração de altura</strong>: a mesma pergunta recebe quatro vereditos corretos e incompatíveis, e o testemunho vira falso quando viaja sem dizer de que mundo fala (fólio V). Cruzar um véu sem dizer que cruzou é o erro que o rito nomeou.</p>",
+      meta: "<b>português</b> véu, cortina · <b>hebraico</b> parsa · <b>aramaico</b> פרסא (a palavra é aramaica) · <b>fonte</b> Etz Chaim do Ari (Estrato B, declarado); Hitlamdut V" },
+    "v-2": { nome: "Véu · a parsa", heb: "פַּרְסָא", aram: "entre Beriah e Yetzirah",
+      cabala: "<p>O segundo véu: abaixo dele a lei vira forma, o decreto vira configuração. No desenho passa logo abaixo de Da’at — a oculta, que não se enumera, fica do lado de cima, com a Mãe e o Pai.</p>",
+      sistema: "<p>Entre <em>não existem</em> (Beriah: nenhum ADR) e <em>existem, não validados</em> (Yetzirah: os arquivos sem selo). O véu é o selo de promoção que falta — a posse não elevada que Bashra nomeou no fólio IV.</p>",
+      meta: "<b>fonte</b> Hitlamdut IV e V; Ari" },
+    "v-3": { nome: "Véu · a parsa", heb: "פַּרְסָא", aram: "entre Yetzirah e Asiyah",
+      cabala: "<p>O terceiro véu: abaixo dele a forma vira feito. Yesod transmite e Malchut recebe — e o véu entre os dois é o que Kushta, a verdade, exige: Yesod só transmite o que foi provado.</p>",
+      sistema: "<p>Entre a configuração e os bytes: o deploy que ninguém aperta, o build que passa e não sobe (Akita, fólio IV). O véu é a diferença entre <em>pronto</em> e <em>no ar</em>.</p>",
+      meta: "<b>fonte</b> Hitlamdut IV; Ari" },
+    "a-nefesh": { nome: "Nefesh · a alma vital", heb: "נֶפֶשׁ", aram: "Nafsha · em Malchut",
+      cabala: "<p>O primeiro dos cinco níveis da alma, <strong>NRNHY</strong>. Na imagem do Bahir, o soprador de vidro: <em>o ar que descansa e molda o vidro</em>. É a alma que anima o corpo, a que Kohelet chama de sopro que volta ao pó.</p>",
+      sistema: "<p>Em Malchut, o reino: o que foi feito e está no ar. A decisão do Gatekeeper de 22/08/2026 fechou a doutrina da casa em <strong>cinco</strong> níveis — o registro de três era leitura incompleta, não escopo.</p>",
+      meta: "<b>português</b> alma vital · <b>hebraico</b> nefesh · <b>aramaico</b> nafsha · <b>sefirá</b> Malchut · <b>fonte</b> Bahir, Zohar, dossiê do Kav (Hitlamdut IV)" },
+    "a-ruach": { nome: "Ruach · o espírito", heb: "רוּחַ", aram: "Ruk’ha · em Zeir Anpin, as seis do meio",
+      cabala: "<p><em>O ar percorrendo o cano</em> (Bahir). Ruach é também vento e sopro — a mãe Alef do Sefer Yetzirah. <strong>Ruach não aponta para uma sefirá</strong>: aponta para <em>Zeir Anpin</em>, a face pequena, o agregado das seis sefirot do meio (Chesed a Yesod). O rótulo está em Tiferet, o coração das seis, mas o nível é das seis.</p>",
+      sistema: "<p>A anomalia que o fólio IV registra: quatro níveis apontam para uma esfera, um aponta para seis. Uma tabela que force os cinco na mesma coluna mente sobre o quinto — por isso o rótulo aqui diz <em>Zeir Anpin</em>.</p>",
+      meta: "<b>português</b> espírito, vento · <b>hebraico</b> ruach · <b>aramaico</b> ruk’ha · <b>sefirá</b> Zeir Anpin (Chesed a Yesod) · <b>fonte</b> Hitlamdut IV" },
+    "a-neshamah": { nome: "Neshamah · a alma superior", heb: "נְשָׁמָה", aram: "Nishimta · em Binah",
+      cabala: "<p><em>O sopro deixando a boca</em> (Bahir). A mesma raiz de <em>neshimah</em>, respiração. É a alma que entende — e Binah é o Entendimento, a Mãe de quem falam os cinquenta portões.</p>",
+      sistema: "<p>Em Binah: estrutura, índice, taxonomia — a alma que dá forma ao que estava difuso. É o nível que o vault tinha registrado quando ainda contava três.</p>",
+      meta: "<b>português</b> alma · <b>hebraico</b> neshamah · <b>aramaico</b> nishimta · <b>sefirá</b> Binah · <b>fonte</b> Bahir, Zohar (Hitlamdut IV)" },
+    "a-chayah": { nome: "Chayah · a vida", heb: "חַיָּה", aram: "Hawê · em Chochmah",
+      cabala: "<p><em>A força vital do sopro, ainda no peito</em> (Bahir). O quarto nível, transcendente: o Bahir separa os três terrenos dos dois transcendentais, e Cordovero para nos três — o corte existe na fonte, mas é distinção <em>interna</em> aos cinco, não recorte do conjunto.</p>",
+      sistema: "<p>Em Chochmah, o flash inicial. Foi o nível que o escriba afirmou não existir no Keter — e existia, em três dossiês com sefirá declarada. O erro que o fólio IV nomeia: deliberar antes de medir.</p>",
+      meta: "<b>português</b> vida, a vivente · <b>hebraico</b> chayah · <b>aramaico</b> hawê · <b>sefirá</b> Chochmah · <b>fonte</b> Bahir, Zohar, dossiê do Kav (Hitlamdut IV)" },
+    "a-yechidah": { nome: "Yechidah · a única", heb: "יְחִידָה", aram: "Yehadá · em Keter",
+      cabala: "<p><em>O desejo de soprar, antes do gesto</em> (Bahir). A alma una, indivisa, que nunca desce; o ponto em que a alma e a sua Fonte não se distinguem. Em Keter, a Coroa, com Tibel HaPir.</p>",
+      sistema: "<p>Vontade e tese pura, antes de qualquer forma — a identidade e a constituição. O que falta escrever na casa é uma aresta só: <strong>alma ↔ mundo</strong>. Os dossiês dão alma ↔ sefirá; o pergaminho dá mundo ↔ Tetragrama; ninguém dá alma ↔ mundo, e a chave está no Sefer Yetzirah: <em>Olam · Shana · Nefesh</em>. Este desenho não a inventa: sobrepõe os dois mapas e declara.</p>",
+      meta: "<b>português</b> única · <b>hebraico</b> yechidah · <b>aramaico</b> yehadá · <b>sefirá</b> Keter · <b>fonte</b> Bahir, Zohar, dossiê do Kav (Hitlamdut IV); decisão do Gatekeeper 22/08/2026" }
+  };
+  for (var kx in SEF_X) SEF[kx] = SEF_X[kx];
+  var ORDEM = ["tzimtzum", "keter", "chochmah", "binah", "daat", "chesed", "gevurah", "tiferet", "netzach", "hod", "yesod", "malkuth", "m-atzilut", "v-1", "m-beriah", "v-2", "m-yetzirah", "v-3", "m-asiyah", "a-yechidah", "a-chayah", "a-neshamah", "a-ruach", "a-nefesh"];
   var painelA = $("arvore-painel");
   function mostraSef(id, rolar) {
     var d = SEF[id]; if (!d) return;
-    Array.prototype.forEach.call(document.querySelectorAll(".arvore-svg .no"), function (c) { c.classList.toggle("ativo", c.getAttribute("data-sef") === id); });
-    var i = ORDEM.indexOf(id), ant = ORDEM[(i + 11) % 12], prox = ORDEM[(i + 1) % 12];
+    Array.prototype.forEach.call(document.querySelectorAll(".arvore-svg .no, .arvore-svg .mundos circle, .arvore-svg .veus line, .arvore-svg .almas text"), function (c) { c.classList.toggle("ativo", c.getAttribute("data-sef") === id); });
+    var n = ORDEM.length, i = ORDEM.indexOf(id), ant = ORDEM[(i + n - 1) % n], prox = ORDEM[(i + 1) % n];
     painelA.innerHTML = '<div class="ap-cab"><span class="ap-nome">' + d.nome + '<span class="heb">' + d.heb + '</span></span><span class="ap-aram">' + d.aram + '</span></div>' +
-      '<p class="ap-rot">na Cabalá</p>' + d.cabala + '<p class="ap-rot">no sistema · Hitlamdut, fólio VI</p>' + d.sistema + '<div class="ap-meta">' + d.meta + '</div>' +
+      '<p class="ap-rot">na Cabalá</p>' + d.cabala + '<p class="ap-rot">no sistema · Hitlamdut' + (/^(m|v|a)-/.test(id) ? ', fólios IV e V' : ', fólio VI') + '</p>' + d.sistema + '<div class="ap-meta">' + d.meta + '</div>' +
       '<div class="ap-nav"><button type="button" data-ir="' + ant + '">&larr; ' + SEF[ant].nome + '</button><button type="button" data-ir="' + prox + '">' + SEF[prox].nome + ' &rarr;</button></div>';
     Array.prototype.forEach.call(painelA.querySelectorAll("button[data-ir]"), function (b) { b.addEventListener("click", function () { mostraSef(b.getAttribute("data-ir"), true); }); });
     aplicaEscrita(painelA);
     if (rolar) painelA.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
-  Array.prototype.forEach.call(document.querySelectorAll(".arvore-svg .alvos circle"), function (c) {
+  Array.prototype.forEach.call(document.querySelectorAll(".arvore-svg .alvos circle, .arvore-svg .alvos rect, .arvore-svg .almas text"), function (c) {
     var id = c.getAttribute("data-sef");
     c.addEventListener("click", function () { mostraSef(id, true); });
     c.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); mostraSef(id, true); } });
@@ -1563,7 +1635,7 @@
 </script>
 
 <script>
-  /* Gargul v3.3.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  /* Gargul v3.4.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
     var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });

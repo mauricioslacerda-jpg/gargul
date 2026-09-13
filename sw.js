@@ -1,7 +1,7 @@
-/* Gargul v3.2.0 — service worker
+/* Gargul v3.3.0 — service worker
    cache-first para o app (index, manifest, ícones); as fontes do Google entram no cache na primeira
    visita e passam a servir sem rede (stale-while-revalidate). Mude CACHE ao publicar uma versão nova. */
-var CACHE = "gargul-v3.2.0";
+var CACHE = "gargul-v3.3.0";
 var APP = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(APP); }).then(function () { return self.skipWaiting(); }));
@@ -23,6 +23,13 @@ self.addEventListener("fetch", function (e) {
     return;
   }
   if (url.origin !== location.origin) return;
+  var pagina = e.request.mode === "navigate" || /\/(index\.html)?$/.test(url.pathname) || /\.(webmanifest|js)$/.test(url.pathname);
+  if (pagina) {
+    /* a página e o próprio sw: rede primeiro (versão nova chega na hora), cache quando não há rede */
+    e.respondWith(fetch(e.request).then(function (r) { if (r && r.ok) { var cp = r.clone(); caches.open(CACHE).then(function (c) { c.put(e.request, cp); }); } return r; })
+      .catch(function () { return caches.match(e.request, { ignoreSearch: true }).then(function (hit) { return hit || caches.match("./index.html"); }); }));
+    return;
+  }
   e.respondWith(caches.match(e.request, { ignoreSearch: true }).then(function (hit) {
     if (hit) return hit;
     return fetch(e.request).then(function (r) { if (r && r.ok) { var cp = r.clone(); caches.open(CACHE).then(function (c) { c.put(e.request, cp); }); } return r; })

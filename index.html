@@ -266,6 +266,9 @@
   /* 7 · a Árvore */
   .arvore { display: grid; grid-template-columns: minmax(280px, 420px) minmax(0, 1fr); gap: 1.2rem 2rem; align-items: start; }
   .arvore-svg svg { width: 100%; height: auto; display: block; color: var(--ink); }
+  .arvore-nota { grid-column: 1 / -1; margin-top: 0.4rem; max-width: 80ch; }
+  .arvore-svg .mundo-lbl text, .arvore-svg .veu-lbl text { text-transform: uppercase; }
+  .arvore-svg .almas text { paint-order: stroke; stroke: var(--ground); stroke-width: 3px; stroke-linejoin: round; }
   .arvore-svg .alvos circle { cursor: pointer; outline: none; }
   .arvore-svg .alvos circle:hover { fill: color-mix(in srgb, var(--gold) 15%, transparent); }
   .arvore-svg .no { transition: fill 0.15s ease; }
@@ -304,6 +307,19 @@
   .gem-in { display: flex; flex-direction: column; gap: 0.35rem; font-family: var(--f-app); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); max-width: 28rem; }
   .gem-in input { font: 1.4rem var(--f-heb); color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: 0.5rem 0.7rem; min-height: 3rem; }
   .gem-nota { max-width: 60ch; margin-top: 0.5rem; }
+  .gem-rede { margin-top: 1rem; padding-top: 0.6rem; border-top: 1px solid var(--rule); font-size: 0.95rem; }
+  .gem-rede .ap-rot { margin-top: 0; }
+  .gem-rede .mt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.9rem; }
+  .gem-rede .mt .he { font-family: var(--f-heb); font-size: 1.35rem; color: var(--gold); }
+  .gem-rede .mt .k { font-family: var(--f-app); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+  .gem-rede .mt .v { font-family: var(--f-app); color: var(--gold); }
+  .gem-rede button.usar { font: inherit; font-size: 0.78rem; font-family: var(--f-app); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 3px; padding: 0.3rem 0.6rem; min-height: 2.4rem; cursor: pointer; }
+  .gem-rede button.usar:hover { border-color: var(--gold); color: var(--gold); }
+  .gem-rede .dic { margin: 0.4rem 0 0; padding: 0; list-style: none; }
+  .gem-rede .dic li { padding: 0.35rem 0; border-top: 1px solid var(--rule-2); line-height: 1.45; }
+  .gem-rede .dic .hw { font-family: var(--f-heb); font-size: 1.15rem; color: var(--gold); margin-right: 0.4rem; }
+  .gem-rede .dic .src { font-family: var(--f-app); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-left: 0.4rem; }
+  .gem-rede .aviso { color: var(--ink-3); font-style: italic; }
   .gem .ap-rot { font-family: var(--f-app); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin: 1rem 0 0.3rem; }
   .gem-termos { margin: 0.9rem 0 0.2rem; padding: 0; list-style: none; }
   .gem-termos li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.2rem 1rem; align-items: baseline; padding: 0.55rem 0; border-top: 1px solid var(--rule-2); }
@@ -506,7 +522,32 @@
   <div class="view" id="v-estudo" data-view="estudo">
   <h2 class="sec"><span class="n">7</span>A Árvore da Vida <span class="eyebrow">Hitlamdut · fólios III e VI</span></h2>
   <section class="arvore" aria-label="A Árvore da Vida, clicável">
-    <div class="arvore-svg"><svg viewBox="0 0 400 448" role="img" aria-label="A Árvore da Vida como está codificada no vault: doze nós em três colunas, vinte e duas arestas entre as dez sefirot, e a sefirá Da'at desenhada no centro sem nenhuma aresta ligada a ela, com a linha de Keter a Tiferet passando exatamente por cima dela.">
+    <div class="arvore-svg"><svg viewBox="0 0 400 448" role="img" aria-label="A Árvore da Vida como está codificada no vault: doze nós em três colunas, vinte e duas arestas entre as dez sefirot, e a sefirá Da'at desenhada no centro sem nenhuma aresta ligada a ela, com a linha de Keter a Tiferet passando exatamente por cima dela; por trás, os quatro mundos, os véus entre eles e os cinco níveis da alma.">
+      <!-- os quatro mundos, como na imagem da Academia de Cabala (13/09/2026): Atzilut envolve Keter; Beriah, Chochmah e Binah;
+           Yetzirah, de Chesed a Yesod; Asiyah, Malchut. No Ari cada mundo contém as dez: este é o mapa por altura, declarado. -->
+      <g class="mundos" fill="var(--gold)" stroke="var(--gold)" stroke-opacity="0.35" stroke-width="0.8">
+        <circle cx="200" cy="66"  r="50"  fill-opacity="0.09"/>
+        <circle cx="200" cy="128" r="104" fill-opacity="0.05"/>
+        <circle cx="200" cy="288" r="118" fill-opacity="0.05"/>
+        <circle cx="200" cy="415" r="30"  fill-opacity="0.10"/>
+      </g>
+      <g class="mundo-lbl" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--gold)" letter-spacing="0.08">
+        <text x="4"   y="30"  text-anchor="start">TIBEL HaPIR</text><text x="4" y="41" font-size="8" fill="var(--ink-3)">Atzilut · אצילות · י</text>
+        <text x="396" y="168" text-anchor="end">TIBEL HaBARÁ</text><text x="396" y="179" font-size="8" fill="var(--ink-3)" text-anchor="end">Beriah · בריאה · ה</text>
+        <text x="4"   y="284" text-anchor="start">TIBEL HaYOSSARÁ</text><text x="4" y="295" font-size="8" fill="var(--ink-3)">Yetzirah · יצירה · ו</text>
+        <text x="396" y="404" text-anchor="end">TIBEL HaASSÁ</text><text x="396" y="415" font-size="8" fill="var(--ink-3)" text-anchor="end">Asiyah · עשיה · ה</text>
+      </g>
+      <!-- os véus: a parsa (פרסא) entre um mundo e o seguinte -->
+      <g class="veus" stroke="var(--gold)" stroke-opacity="0.55" stroke-width="0.9" stroke-dasharray="3 4" fill="none">
+        <line x1="60"  y1="93"  x2="340" y2="93"/>
+        <line x1="40"  y1="188" x2="360" y2="188"/>
+        <line x1="90"  y1="391" x2="310" y2="391"/>
+      </g>
+      <g class="veu-lbl" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--gold)" fill-opacity="0.9" text-anchor="end">
+        <text x="340" y="90">véu · פרסא</text>
+        <text x="360" y="185">véu · פרסא</text>
+        <text x="310" y="388">véu · פרסא</text>
+      </g>
       <g stroke="currentColor" stroke-opacity="0.28" stroke-width="1.3" fill="none">
         <line x1="200" y1="68"  x2="286" y2="118"/>
         <line x1="200" y1="68"  x2="114" y2="118"/>
@@ -578,6 +619,14 @@
         <text x="286" y="443" text-anchor="middle">misericórdia</text>
       </g>
 
+      <!-- os cinco níveis da alma, NRNHY, na sefirá que a tradição lhes dá (Zohar; Bahir; dossiê do Kav) -->
+      <g class="almas" font-family="Frank Ruhl Libre, Cardo, serif" font-size="9.5" font-style="italic" fill="var(--gold)">
+        <text x="176" y="72"  text-anchor="end">Yehadá · יחידה</text>
+        <text x="308" y="136" text-anchor="start">Hawê · חיה</text>
+        <text x="92"  y="136" text-anchor="end">Nishimta · נשמה</text>
+        <text x="176" y="264" text-anchor="end">Ruk’ha · רוח</text>
+        <text x="176" y="419" text-anchor="end">Nafsha · נפש</text>
+      </g>
       <g class="alvos" fill="transparent" stroke="none">
         <circle data-sef="tzimtzum" cx="200" cy="22"  r="22" tabindex="0" role="button" aria-label="Tzimtzum — a contração, fora da Árvore"/>
         <circle data-sef="keter"    cx="200" cy="68"  r="30" tabindex="0" role="button" aria-label="Keter — a coroa"/>
@@ -594,6 +643,7 @@
       </g>
     </svg></div>
     <div class="ap" id="arvore-painel" aria-live="polite"><p class="ap-vazio">Toque numa esfera.</p></div>
+    <p class="sub-sec arvore-nota"><b>Mundos, véus e almas (13/09/2026).</b> Os quatro mundos com o nome aramaico da casa — <i>Tibel HaPir</i> (Atzilut, א), <i>HaBará</i> (Beriah), <i>HaYossará</i> (Yetzirah), <i>HaAssá</i> (Asiyah) — e a letra do Nome que os chaveia (י ה ו ה; Hitlamdut fólio IV: <i>Tibel HaPir = Atziluth = Yod</i>); entre um mundo e o seguinte, o <b>véu</b>, a <i>parsa</i> (פרסא) do Ari; os cinco níveis da alma no lugar que o Zohar lhes dá — <i>Nafsha</i> em Malchut, <i>Ruk’ha</i> em Tiferet, <i>Nishimta</i> em Binah, <i>Hawê</i> em Chochmah, <i>Yehadá</i> em Keter (NRNHY; Bahir, Zohar e o dossiê do Kav no vault). O <b>mapa por altura</b> (Atzilut em Keter; Beriah em Chochmah e Binah; Yetzirah de Chesed a Yesod; Asiyah em Malchut) segue a imagem da Academia de Cabala que ele enviou; no Ari cada mundo contém as dez sefirot inteiras — as duas leituras coexistem e esta página declara qual desenha.</p>
   </section>
 
   <h2 class="sec"><span class="n">8</span>As 22 letras <span class="eyebrow">tábua · valor · quatro escritas</span></h2>
@@ -611,6 +661,8 @@
     <label class="gem-in">palavra ou nome, em português ou em hebraico <input type="text" id="gem-txt" dir="auto" value="luz" placeholder="luz · árvore da vida · Mauricio · כתר" autocomplete="off" spellcheck="false"></label>
     <p class="sub-sec gem-nota">Em português, a palavra é <b>traduzida</b> pelo léxico da casa (sentido primeiro) e o nome próprio recebe o seu equivalente bíblico; o que não está no léxico é <b>transliterado</b> pelo som, e a página avisa. A gematria conta as letras hebraicas escritas.</p>
     <div id="gem-out"></div>
+    <div id="gem-mt" class="gem-rede" hidden></div>
+    <div id="gem-dic" class="gem-rede" hidden></div>
   </section>
 
   </div>
@@ -629,7 +681,7 @@
     Camadas A–F e par de Kohelet segundo <code>keter/netzach/skills/roda-do-tempo.md</code> · tabela dos meses na recensão <b>Gra</b> (Vilna Gaon), declarada em 25/08/2026 — uma das <b>quatro versões</b> do Sêfer Ietsirá (Curta, Longa, Saadia, Gra) que Kaplan documenta; a Ari-Gra é a única em concordância com o Zohar, e citação sem versão declarada não é comparável (régua de 11/09/2026) · três mães invertidas para o hemisfério Sul (Rio, decisão de 25/08/2026) · duplas em ordem alfabética a partir do Shabbat, planetas na ordem caldaica.<br>
     Data hebraica calculada na página (algoritmo de Reingold–Dershowitz, conferido contra o LOG em 8 datas de 2026–2027 e contra o Hebcal em 11/09/2026: 29 Elul 5786, 1 Tishrei 5787 após 18h, 3 Adar I 5787 em 10/02/2027). <b>Conferência das atribuições em 11/09/2026:</b> as 12 simples ↔ meses (ה Nisan … ק Adar) e as 3 mães batem com o Sêfer Ietsirá 5:2 e 3:3–3:8 no Sefaria (Warsaw 1884); nas 7 duplas o Sefaria (Versão Curta) dá ב = Saturno + <i>domingo</i> + olho direito e desloca os dias em um — a Roda segue a <b>Gra-Ari</b> (ב = Saturno + Shabbat + boca; ג = Júpiter + domingo + olho direito …), conforme Kaplan cap. 4 citado no dossiê reabsorvido; as duas recensões diferem exatamente aí, e é por isso que a versão é declarada. O <b>LOG do vault é a fonte canônica</b>: esta página não substitui o gate <code>check_log.py</code>. Período litúrgico é cálculo local, com Rosh Hashaná e Simchat Torá de dois dias (diáspora) e a âncora dos 40 dias em 30 Av.<br>
     Escritas: <b>hebraico</b> é o ktav Ashuri; <b>aramaico</b> é o aramaico imperial (Unicode 10840–10855, Noto Sans), a escrita de que o Ashuri descende; <b>paleo-hebraico</b> e <b>Malachim</b> são os 46 glifos vetorizados da tábua dos 72 Nomes em <code>keter/malkuth/otiyot/svg/</code> — 23 letras cada na tábua, sem ג (doutrina do sustento, Hitlamdut fólio IX) e sem as finais ן ף ץ; <b>o gimel foi acrescentado em 13/09/2026</b>, desenhado à mão pelas fontes: paleo-hebraico na forma média de ancient-hebrew.org (<i>gimel.htm</i>: o pé, "caminhar, carregar, reunir"; o mesmo traço de 𐤂) e Malachim pelo <i>Malachim_letter_gimel</i> da gravura de Agrippa no Commons — 48 glifos. Identificados em 11/09/2026 pela gravura de Agrippa (<i>De Occulta Philosophia</i> III.30, 1533): a mão "angular" da tábua é o <b>ktav Ivri</b>, a escrita hebraica pré-exílica (Sanhedrin 21b–22a); a Malachim é a de Agrippa — a foto da tábua (13/09/2026) confirma as quatro letras disputadas; os arquivos ב/ד e ו/ז estavam trocados pelo decodificador e foram corrigidos.<br>
-    <b>Áreas 7–9 (13/09/2026):</b> a Árvore clicável e a tábua das 22 vêm do <a href="https://claude.ai/code/artifact/75f70673-21c2-42c9-bf60-2bfbbbd7c0bd">Hitlamdut da Quadratura</a> (fólios III, VI e IX), sem repetir o que já está lá; a gematria é <i>mispar hechrachi</i> (א1 … ת400), com <i>gadol</i> (finais 500–900), <i>siduri</i> (ordinal) e <i>katan</i> (reduzido), e procura o mesmo valor entre as 72 tríades, as sefirot, os meses, sete Nomes divinos, os nomes das letras e o léxico. <b>Em português</b> (13/09): léxico da casa com 555 entradas (<code>keter/malkuth/otiyot/lexico_pt_he.json</code>) — tradução por sentido, equivalente bíblico para nomes, transliteração fonética rotulada como último recurso; e o hebraico romanizado (shalom, neshama) volta ao léxico pela transliteração ou pelo esqueleto consonantal, com os candidatos oferecidos como "talvez".
+    <b>Áreas 7–9 (13/09/2026):</b> a Árvore clicável e a tábua das 22 vêm do <a href="https://claude.ai/code/artifact/75f70673-21c2-42c9-bf60-2bfbbbd7c0bd">Hitlamdut da Quadratura</a> (fólios III, VI e IX), sem repetir o que já está lá; a gematria é <i>mispar hechrachi</i> (א1 … ת400), com <i>gadol</i> (finais 500–900), <i>siduri</i> (ordinal) e <i>katan</i> (reduzido), e procura o mesmo valor entre as 72 tríades, as sefirot, os meses, sete Nomes divinos, os nomes das letras e o léxico. <b>Em português</b> (13/09): léxico da casa com 555 entradas (<code>keter/malkuth/otiyot/lexico_pt_he.json</code>) — tradução por sentido, equivalente bíblico para nomes, transliteração fonética rotulada como último recurso; e o hebraico romanizado (shalom, neshama) volta ao léxico pela transliteração ou pelo esqueleto consonantal, com os candidatos oferecidos como "talvez". <b>Com rede</b> (13/09): o <b>tradutor automático</b> (MyMemory, hebraico moderno) aparece como camada à parte, rotulada, nunca no lugar do léxico; e o <b>dicionário</b> do Sefaria (Jastrow para o hebraico e o aramaico rabínicos, Klein para a etimologia, BDB para o bíblico) dá o sentido e o caminho ao aramaico — não existe tradutor automático de aramaico, só dicionário. Sem rede, a página segue com o léxico.
     <a href="https://www.sefaria.org/Sefer_Yetzirah.5">Sefer Yetzirah 5 · Sefaria</a> · <a href="https://www.hebcal.com/converter">Hebcal /converter</a> · Kohelet 3:1–8.
   </footer>
   </div>
@@ -1414,6 +1466,46 @@
     LEX.forEach(function (e) { var h = e.he.replace(/\s/g, ""); if (h === w || vistos[h] || e.cat === "transliteração") return; if (gem(h) === v) { vistos[h] = 1; eq.push('<li>' + esc(e.pt) + ' <span class="k">' + esc(e.tr) + '</span><span class="heb">' + e.he + '</span><span class="k">' + esc(e.cat) + (e.sig ? ' · ' + esc(e.sig) : '') + '</span></li>'); } });
     return eq.map(function (li) { var m = li.match(/<span class="heb">([^<]+)<\/span>/); var h = m ? m[1].replace(/\s/g, "") : ""; return (h && h.length === w.length) ? li.replace('</li>', '<span class="tag-t mishkal" title="mesmo valor e mesmo número de letras — Pardes Rimonim 30:8 §1">mishkal</span></li>') : li; });
   }
+  /* ===== camadas com rede (13/09): tradutor automático e dicionário — nunca substituem o léxico; rotuladas ===== */
+  var gemSeq = 0;
+  function limpaHtml(t) { return String(t || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim(); }
+  function tradutorMT(raw, seq) {
+    var box = $("gem-mt"); box.hidden = true; box.innerHTML = "";
+    if (!navigator.onLine || /[\u05D0-\u05EA]/.test(raw) || !raw.trim()) return;
+    fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(raw.trim()) + "&langpair=pt|he")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (seq !== gemSeq) return;
+        var t = d && d.responseData && d.responseData.translatedText; if (!t || !/[\u05D0-\u05EA]/.test(t)) return;
+        var w = t.replace(/[^\u05D0-\u05EA]/g, ""), alt = [];
+        (d.matches || []).forEach(function (m) { var x = m && m.translation; if (x && x !== t && /[\u05D0-\u05EA]/.test(x) && alt.indexOf(x) < 0 && alt.length < 2) alt.push(x); });
+        box.innerHTML = '<p class="ap-rot">pelo tradutor automático · hebraico moderno</p><div class="mt"><span class="he">' + esc(t) + '</span><span class="v">' + gem(w) + '</span><span class="k">MyMemory · ' + (d.responseData.match ? Math.round(d.responseData.match * 100) + '% de confiança · ' : '') + 'língua de hoje, não a das fontes</span><button type="button" class="usar" data-he="' + esc(t) + '">usar este</button>' +
+          alt.map(function (x) { return '<span class="k">ou</span><span class="he">' + esc(x) + '</span><span class="v">' + gem(x.replace(/[^\u05D0-\u05EA]/g, "")) + '</span><button type="button" class="usar" data-he="' + esc(x) + '">usar</button>'; }).join("") + '</div>';
+        box.hidden = false; aplicaEscrita(box);
+        Array.prototype.forEach.call(box.querySelectorAll("button.usar"), function (b) { b.addEventListener("click", function () { $("gem-txt").value = b.getAttribute("data-he"); renderGem(); }); });
+      }).catch(function () {});
+  }
+  function dicionario(w, seq) {
+    var box = $("gem-dic"); box.hidden = true; box.innerHTML = "";
+    if (!navigator.onLine || !w) return;
+    fetch("https://www.sefaria.org/api/words/" + encodeURIComponent(w))
+      .then(function (r) { return r.json(); })
+      .then(function (arr) {
+        if (seq !== gemSeq || !Array.isArray(arr) || !arr.length) return;
+        var ordem = { "Jastrow Dictionary": 0, "Klein Dictionary": 1, "BDB Augmented Strong": 2 }, itens = [];
+        arr.filter(function (e) { return e && e.parent_lexicon in ordem; }).sort(function (a, b) { return ordem[a.parent_lexicon] - ordem[b.parent_lexicon]; }).slice(0, 4).forEach(function (e) {
+          var sens = (e.content && e.content.senses) || [], def = "";
+          for (var i = 0; i < sens.length && def.length < 220; i++) { var d = limpaHtml(sens[i].definition); if (d) def += (def ? " · " : "") + d; }
+          if (!def && e.content && e.content.morphology) def = limpaHtml(e.content.morphology);
+          if (!def) return;
+          var rot = e.parent_lexicon === "Jastrow Dictionary" ? "Jastrow · hebraico e aramaico rabínicos" : (e.parent_lexicon === "Klein Dictionary" ? "Klein · etimologia" : "BDB · hebraico bíblico");
+          itens.push('<li><span class="hw">' + esc(e.headword || w) + '</span>' + esc(def.slice(0, 240)) + (def.length > 240 ? "…" : "") + '<span class="src">' + rot + '</span></li>');
+        });
+        if (!itens.length) return;
+        box.innerHTML = '<p class="ap-rot">no dicionário · Sefaria</p><ul class="dic">' + itens.join("") + '</ul><p class="aviso">Jastrow é o dicionário do Talmud e dos Targumim: é por ele que a palavra chega ao aramaico. Não há tradutor automático para o aramaico; o que existe é dicionário.</p>';
+        box.hidden = false; aplicaEscrita(box);
+      }).catch(function () {});
+  }
   function renderGem() {
     var raw = $("gem-txt").value, out = $("gem-out");
     var temHeb = /[\u05D0-\u05EA]/.test(raw), termos = [], w = "";
@@ -1423,7 +1515,7 @@
     } else {
       termos = resolvePt(raw); w = termos.map(function (t) { return t.e.he.replace(/[^\u05D0-\u05EA]/g, ""); }).join("");
     }
-    if (!w) { out.innerHTML = '<p class="sub-sec">Escreva uma palavra, um nome ou letras hebraicas.</p>'; return; }
+    if (!w) { out.innerHTML = '<p class="sub-sec">Escreva uma palavra, um nome ou letras hebraicas.</p>'; $("gem-mt").hidden = true; $("gem-dic").hidden = true; ++gemSeq; return; }
     var h = '<ul class="gem-termos">' + termos.map(function (t) {
       var hv = t.e.he.replace(/[^\u05D0-\u05EA]/g, "");
       var tag = t.modo === "fon" ? '<span class="tag-t fon">transliterado · sem sentido</span>' : (t.modo === "tr" ? '<span class="tag-t">lido como hebraico romanizado · ' + esc(t.e.cat) + '</span>' : (t.e.cat ? '<span class="tag-t">' + esc(t.e.cat) + '</span>' : ''));
@@ -1440,6 +1532,8 @@
     h += '<p class="sub-sec gem-regra">Regra da casa: a gematria <b>confirma</b> um vínculo que a tradição já fez; não o cria. Igualdade sem fonte é observação, não doutrina (Avot 3:18: "tempero da sabedoria"). Método e <i>kolel</i> sempre declarados; conta-se a grafia escrita, sem nikud — o léxico usa ktiv male, e no Tanach a palavra pode ter menos letras. Zohar Bereshit 46b, citado no Pardes: as contas pendem de Malchut.</p>';
     out.innerHTML = h; aplicaEscrita(out);
     Array.prototype.forEach.call(out.querySelectorAll("button.talvez"), function (b) { b.addEventListener("click", function () { $("gem-txt").value = b.getAttribute("data-he"); renderGem(); }); });
+    var seq = ++gemSeq; clearTimeout(renderGem._t);
+    renderGem._t = setTimeout(function () { tradutorMT(raw, seq); dicionario(termos.length === 1 ? termos[0].e.he.replace(/[^\u05D0-\u05EA\s]/g, "").trim().split(/\s+/)[0] : "", seq); }, 450);
   }
   $("gem-txt").addEventListener("input", renderGem); renderGem();
   aplicaEscrita();
@@ -1469,8 +1563,11 @@
 </script>
 
 <script>
-  /* Gargul v3.2.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
-  if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); }); }
+  /* Gargul v3.3.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
+    var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });
+  }
 </script>
 </body>
 </html>

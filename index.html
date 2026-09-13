@@ -654,9 +654,6 @@
         <button type="button" data-fonte="120" aria-pressed="false" data-i18n="fonte-2">Grande</button>
         <button type="button" data-fonte="140" aria-pressed="false" data-i18n="fonte-3">Maior</button>
       </div>
-      <p class="sub-sec" data-i18n="tema-n">Leitura à Kindle: papel quente, sépia e escuro sem branco puro; automático segue o aparelho.</p>
-    </section>
-    <section class="drawer-sec"><p class="drawer-k" data-i18n="menu-fonte-x" hidden></p>
       <p class="sub-sec" data-i18n="fonte-n">Vale para o texto, a roda e a Árvore. A escolha fica guardada neste aparelho.</p>
     </section>
     <section class="drawer-sec"><p class="drawer-k" data-i18n="menu-escrita">Escrita das letras</p>
@@ -1960,7 +1957,7 @@
 </script>
 
 <script>
-  /* Gargul v4.5.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  /* Gargul v4.5.1 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
     var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });

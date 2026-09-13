@@ -289,6 +289,13 @@
   .ap .ap-meta { font-family: var(--f-app); font-size: 0.72rem; color: var(--ink-3); line-height: 1.9; border-top: 1px solid var(--rule); padding-top: 0.5rem; margin-top: 0.6rem; }
   .ap .ap-meta b { color: var(--ink-2); font-weight: 400; }
   .ap .rub { color: var(--gold); font-weight: 700; }
+  .ap-ficha { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem 1.2rem; margin: 0.7rem 0 0.4rem; padding: 0.6rem 0; border-top: 1px solid var(--rule-2); border-bottom: 1px solid var(--rule-2); }
+  .ap-ficha .fr { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: 0.5rem; align-items: baseline; }
+  .ap-ficha dt { font-family: var(--f-app); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); padding-top: 0.15rem; }
+  .ap-ficha dd { margin: 0; font-size: 0.95rem; line-height: 1.4; }
+  .ap-ficha dd .heb { font-family: var(--f-heb); color: var(--gold); }
+  .ap-ficha dd .fs { display: block; font-family: var(--f-app); font-size: 0.64rem; color: var(--ink-3); letter-spacing: 0.02em; margin-top: 0.05rem; }
+  @media (max-width: 700px) { .ap-ficha { grid-template-columns: 1fr; } }
   .ap .ap-nav { display: flex; gap: 0.6rem; margin-top: 0.9rem; }
   .ap .ap-nav button { flex: 1 1 0; min-height: 2.75rem; background: transparent; color: var(--ink); border: 1px solid var(--rule); border-radius: 3px; cursor: pointer; font-family: var(--f-app); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
   .ap .ap-nav button:hover { border-color: var(--gold); color: var(--gold); }
@@ -1320,6 +1327,36 @@
       meta: "<b>português</b> única · <b>hebraico</b> yechidah · <b>aramaico</b> yehadá · <b>sefirá</b> Keter · <b>fonte</b> Bahir, Zohar, dossiê do Kav (Hitlamdut IV); decisão do Gatekeeper 22/08/2026" }
   };
   for (var kx in SEF_X) SEF[kx] = SEF_X[kx];
+  /* a ficha de cada esfera — cada campo com a sua fonte; o que a casa não tem fica em branco, não se inventa */
+  var FICHA = {
+    keter:    { nome: ["אהיה", "Ehyeh", "Êx 3:14"], ordem: ["חיות הקודש", "Chayot haKodesh"], corpo: ["a coroa", "kitra"], ush: "", alma: "Yechidah", mundo: "Atzilut · Tibel HaPir" },
+    chochmah: { nome: ["יה", "Yah", ""], ordem: ["אופנים", "Ofanim"], corpo: ["o cérebro", "mocha"], ush: "", alma: "Chayah", mundo: "Beriah · Tibel HaBará" },
+    binah:    { nome: ["יהוה (אלהים)", "YHVH lido Elohim", ""], ordem: ["אראלים", "Erelim"], corpo: ["o coração", "liba"], ush: "", alma: "Neshamah", mundo: "Beriah · Tibel HaBará" },
+    daat:     { nome: ["", "", ""], ordem: ["", ""], corpo: ["", ""], ush: "", alma: "", mundo: "no véu entre Beriah e Yetzirah" },
+    chesed:   { nome: ["אל", "El", ""], ordem: ["חשמלים", "Chashmalim"], corpo: ["o braço direito", "dro'a yemina"], ush: "Abraão", alma: "Ruach (Zeir Anpin)", mundo: "Yetzirah · Tibel HaYossará" },
+    gevurah:  { nome: ["אלהים גבור", "Elohim Gibor", ""], ordem: ["שרפים", "Serafim"], corpo: ["o braço esquerdo", "dro'a smala"], ush: "Isaac", alma: "Ruach (Zeir Anpin)", mundo: "Yetzirah · Tibel HaYossará" },
+    tiferet:  { nome: ["יהוה", "YHVH (Eloah vaDa'at)", ""], ordem: ["מלאכים", "Malachim"], corpo: ["o tronco", "gufa"], ush: "Jacó", alma: "Ruach (Zeir Anpin)", mundo: "Yetzirah · Tibel HaYossará" },
+    netzach:  { nome: ["יהוה צבאות", "YHVH Tzevaot", ""], ordem: ["אלהים", "Elohim"], corpo: ["a perna direita", "shok yemina"], ush: "Moisés", alma: "Ruach (Zeir Anpin)", mundo: "Yetzirah · Tibel HaYossará" },
+    hod:      { nome: ["אלהים צבאות", "Elohim Tzevaot", ""], ordem: ["בני אלהים", "Bnei Elohim"], corpo: ["a perna esquerda", "shok smala"], ush: "Aarão", alma: "Ruach (Zeir Anpin)", mundo: "Yetzirah · Tibel HaYossará" },
+    yesod:    { nome: ["שדי · אל חי", "Shaddai · El Chai", ""], ordem: ["כרובים", "Keruvim"], corpo: ["o sinal da aliança", "ot brit kodesh"], ush: "José", alma: "Ruach (Zeir Anpin)", mundo: "Yetzirah · Tibel HaYossará" },
+    malkuth:  { nome: ["אדני", "Adonai", ""], ordem: ["אישים", "Ishim"], corpo: ["a boca", "peh — a Torá oral"], ush: "Davi", alma: "Nefesh", mundo: "Asiyah · Tibel HaAssá" }
+  };
+  var RODA_DIA = { chesed: "domingo · Gimel · Júpiter", gevurah: "segunda · Dalet · Marte", tiferet: "terça · Kaf · Sol", netzach: "quarta · Pe · Vênus", hod: "quinta · Resh · Mercúrio", yesod: "sexta · Tav · Lua", malkuth: "Shabbat · Bet · Saturno", keter: "Shabbat, com Malchut" };
+  function fichaHtml(id) {
+    var f = FICHA[id]; if (!f) return "";
+    var d = SEF[id] || {}, rows = [];
+    function row(k, v, fonte) { if (v) rows.push('<div class="fr"><dt>' + k + '</dt><dd>' + v + (fonte ? '<span class="fs">' + fonte + '</span>' : '') + '</dd></div>'); }
+    row("nome divino", f.nome[0] ? '<span class="heb">' + f.nome[0] + '</span> ' + f.nome[1] + (f.nome[2] ? ' · ' + f.nome[2] : '') : "", f.nome[0] ? "Zohar · Pardes Rimonim · tábua de Kaplan, SY cap. 1" : "");
+    row("ordem angélica", f.ordem[0] ? '<span class="heb">' + f.ordem[0] + '</span> ' + f.ordem[1] : "", f.ordem[0] ? "as dez ordens de Maimônides, Yesodei haTorah 2:7, na tábua do Pardes" : "");
+    var anjo = id === "keter" ? ["Metatron — o Sofer, o escriba", "מטטרון"] : (ANJOS[d.nome] || ANJOS[(d.nome || "").replace("Malkuth", "Malchut")]);
+    row("anjo da casa", anjo ? anjo[0] + (anjo[1] ? ' <span class="heb">' + anjo[1] + '</span>' : '') : "", anjo ? "Hitlamdut fólio VI, regências de set/2026" : "");
+    row("no corpo", f.corpo[0] ? f.corpo[0] + ' <i>' + f.corpo[1] + '</i>' : "", f.corpo[0] ? "Tikunei Zohar, Patach Eliyahu" : "");
+    row("Ushpizin", f.ush, f.ush ? "Zohar Emor 103b · os sete hóspedes de Sukkot" : "");
+    row("alma", f.alma, f.alma ? "NRNHY · Hitlamdut fólio IV" : "");
+    row("mundo", f.mundo, "mapa por altura, Hitlamdut V");
+    row("na Roda", RODA_DIA[id] || "", RODA_DIA[id] ? "camada A, duplas na Gra-Ari" : "");
+    return rows.length ? '<dl class="ap-ficha">' + rows.join("") + '</dl>' : "";
+  }
   var ORDEM = ["tzimtzum", "keter", "chochmah", "binah", "daat", "chesed", "gevurah", "tiferet", "netzach", "hod", "yesod", "malkuth", "m-atzilut", "v-1", "m-beriah", "v-2", "m-yetzirah", "v-3", "m-asiyah", "a-yechidah", "a-chayah", "a-neshamah", "a-ruach", "a-nefesh"];
   var painelA = $("arvore-painel");
   function mostraSef(id, rolar) {
@@ -1327,7 +1364,7 @@
     Array.prototype.forEach.call(document.querySelectorAll(".arvore-svg .no, .arvore-svg .mundos circle, .arvore-svg .veus line, .arvore-svg .almas text"), function (c) { c.classList.toggle("ativo", c.getAttribute("data-sef") === id); });
     var n = ORDEM.length, i = ORDEM.indexOf(id), ant = ORDEM[(i + n - 1) % n], prox = ORDEM[(i + 1) % n];
     painelA.innerHTML = '<div class="ap-cab"><span class="ap-nome">' + d.nome + '<span class="heb">' + d.heb + '</span></span><span class="ap-aram">' + d.aram + '</span></div>' +
-      '<p class="ap-rot">na Cabalá</p>' + d.cabala + '<p class="ap-rot">no sistema · Hitlamdut' + (/^(m|v|a)-/.test(id) ? ', fólios IV e V' : ', fólio VI') + '</p>' + d.sistema + '<div class="ap-meta">' + d.meta + '</div>' +
+      '<p class="ap-rot">na Cabalá</p>' + d.cabala + fichaHtml(id) + '<p class="ap-rot">no sistema · Hitlamdut' + (/^(m|v|a)-/.test(id) ? ', fólios IV e V' : ', fólio VI') + '</p>' + d.sistema + '<div class="ap-meta">' + d.meta + '</div>' +
       '<div class="ap-nav"><button type="button" data-ir="' + ant + '">&larr; ' + SEF[ant].nome + '</button><button type="button" data-ir="' + prox + '">' + SEF[prox].nome + ' &rarr;</button></div>';
     Array.prototype.forEach.call(painelA.querySelectorAll("button[data-ir]"), function (b) { b.addEventListener("click", function () { mostraSef(b.getAttribute("data-ir"), true); }); });
     aplicaEscrita(painelA);
@@ -1635,7 +1672,7 @@
 </script>
 
 <script>
-  /* Gargul v3.4.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  /* Gargul v3.5.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
     var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });

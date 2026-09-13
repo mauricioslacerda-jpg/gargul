@@ -82,6 +82,7 @@ Datas em horário do Rio. Fontes e réguas: `specs/cabala-app/` no vault.
   quebra de página por vista); colapso corrigido — cada seção fecha e abre sozinha, sem levar as seguintes.
 - **v4.8.0** — no celular o título vem centralizado no topo, com data, ⚙ e ☰ na linha de baixo; o número da
   versão aparece no rodapé do menu ☰.
+- **v4.8.1** — a área 2 chama-se **Gargul · a roda das 22 letras** (o astrolábio leva o nome do app).
 
 ## O que fica em português por decisão
 

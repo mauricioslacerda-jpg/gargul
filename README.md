@@ -10,6 +10,7 @@ hebraico pelos nove tipos de número do Pardes Rimonim 30:8. Instalável como ap
 da primeira visita.
 
 - **No ar:** https://mauricioslacerda-jpg.github.io/gargul/
+- **Mudanças:** [CHANGELOG.md](CHANGELOG.md) — registro permanente, versão a versão, desde a v1 (11/09/2026).
 - **Vistas:** `#hoje` · `#semana` · `#estudo` · `#gematria` · `#registro`
 - **Fontes e regras:** área 11 da página (Registro → Fontes). Toda tabela declara a fonte e a versão; gematria
   confirma vínculo, não cria (Avot 3:18).

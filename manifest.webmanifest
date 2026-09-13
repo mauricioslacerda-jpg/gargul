@@ -1,0 +1,19 @@
+{
+  "name": "Gargul — Roda do Tempo e as 22 letras",
+  "short_name": "Gargul",
+  "description": "A leitura do dia nas camadas do Sêfer Ietsirá, a Árvore da Vida, as 22 letras em quatro escritas e a gematria. Calcula tudo na página.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0F1426",
+  "theme_color": "#0F1426",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

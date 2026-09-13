@@ -80,6 +80,8 @@ Datas em horário do Rio. Fontes e réguas: `specs/cabala-app/` no vault.
   desenhos ficam no tamanho; título e abas nunca cortam.
 - **v4.7.0** — tamanho **Menor** (90 %); **Imprimir · PDF** na ⚙ (as cinco vistas, seções abertas, papel claro,
   quebra de página por vista); colapso corrigido — cada seção fecha e abre sozinha, sem levar as seguintes.
+- **v4.8.0** — no celular o título vem centralizado no topo, com data, ⚙ e ☰ na linha de baixo; o número da
+  versão aparece no rodapé do menu ☰.
 
 ## O que fica em português por decisão
 

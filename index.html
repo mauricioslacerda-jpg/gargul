@@ -192,6 +192,15 @@
   .drawer .seg-roda { display: grid; grid-template-columns: repeat(2, 1fr); max-width: none; }
   .drawer .btn-conta { align-self: flex-start; min-height: 2.75rem; padding: 0.4rem 1rem; font-size: 0.72rem; }
   .drawer .conta { margin: 0; }
+  /* no menu, os seletores quebram linha em vez de cortar: vale para a letra "maior" e para telas estreitas */
+  .drawer .seg { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.2rem, 1fr)); overflow: visible; }
+  .drawer .seg-roda { grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); }
+  .drawer .seg button { min-width: 0; white-space: normal; overflow-wrap: anywhere; line-height: 1.25; padding-left: 0.4rem; padding-right: 0.4rem; border-bottom: 1px solid var(--rule); }
+  .drawer .seg-idioma, .drawer .seg-tema, .drawer .seg-fonte, #hemisferio { display: grid; }
+  .drawer .seg-tema { grid-template-columns: repeat(auto-fit, minmax(6.8rem, 1fr)); }
+  .drawer .seg-fonte { grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr)); }
+  .drawer .seg-idioma { grid-template-columns: repeat(3, 1fr); }
+  #hemisferio { grid-template-columns: repeat(2, 1fr); }
   .drawer[hidden], .drawer-fundo[hidden], .conta[hidden] { display: none !important; }
   .conta { display: grid; grid-template-columns: 1fr; gap: 0.5rem 1rem; padding: 0.7rem 0.9rem; border: 1px solid var(--rule); background: var(--panel); border-radius: 3px; margin-top: 0.4rem; }
   .conta .eyebrow, .conta .sub-sec { grid-column: 1 / -1; margin: 0; }
@@ -1957,7 +1966,7 @@
 </script>
 
 <script>
-  /* Gargul v4.5.1 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  /* Gargul v4.5.2 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
     var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });

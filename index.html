@@ -266,7 +266,18 @@
   /* 7 · a Árvore */
   .arvore { display: grid; grid-template-columns: minmax(280px, 420px) minmax(0, 1fr); gap: 1.2rem 2rem; align-items: start; }
   .arvore-svg svg { width: 100%; height: auto; display: block; color: var(--ink); }
-  .arvore-nota { grid-column: 1 / -1; margin-top: 0.4rem; max-width: 80ch; }
+  .arvore-nota { grid-column: 1 / -1; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid var(--rule); }
+  .arvore-nota .ap-rot { margin-top: 0; }
+  .an-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 2rem; }
+  .an-item > b { display: block; font-family: var(--f-heb); font-weight: 500; font-size: 1.08rem; margin-bottom: 0.15rem; }
+  .an-item > span { display: block; color: var(--ink-2); font-size: 0.9rem; line-height: 1.45; }
+  .an-item ul { margin: 0.5rem 0 0.4rem; padding: 0; list-style: none; }
+  .an-item li { padding: 0.28rem 0; border-top: 1px solid var(--rule-2); font-size: 0.95rem; line-height: 1.4; }
+  .an-item li i { color: var(--gold); font-style: italic; }
+  .an-item .heb { font-family: var(--f-heb); color: var(--gold); }
+  .an-item small { display: block; font-family: var(--f-app); font-size: 0.66rem; color: var(--ink-3); letter-spacing: 0.02em; line-height: 1.5; }
+  .an-metodo { margin: 1rem 0 0; max-width: 78ch; color: var(--ink-2); font-size: 0.95rem; line-height: 1.5; }
+  @media (max-width: 900px) { .an-grid { grid-template-columns: 1fr; gap: 0.9rem; } }
   .arvore-svg .mundo-lbl text, .arvore-svg .veu-lbl text { text-transform: uppercase; }
   .arvore-svg .almas text { paint-order: stroke; stroke: var(--ground); stroke-width: 3px; stroke-linejoin: round; cursor: pointer; }
   .arvore-svg .alvos rect { cursor: pointer; outline: none; }
@@ -670,7 +681,21 @@
       </g>
     </svg></div>
     <div class="ap" id="arvore-painel" aria-live="polite"><p class="ap-vazio">Toque numa esfera.</p></div>
-    <p class="sub-sec arvore-nota"><b>Mundos, véus e almas (13/09/2026).</b> Os quatro mundos com o nome aramaico da casa — <i>Tibel HaPir</i> (Atzilut, א), <i>HaBará</i> (Beriah), <i>HaYossará</i> (Yetzirah), <i>HaAssá</i> (Asiyah) — e a letra do Nome que os chaveia (י ה ו ה; Hitlamdut fólio IV: <i>Tibel HaPir = Atziluth = Yod</i>); entre um mundo e o seguinte, o <b>véu</b>, a <i>parsa</i> (פרסא) do Ari; os cinco níveis da alma no lugar que a casa lhes dá — <i>Nafsha</i> em Malchut, <i>Ruk’ha</i> em <b>Zeir Anpin</b> (as seis do meio; o rótulo fica em Tiferet), <i>Nishimta</i> em Binah, <i>Hawê</i> em Chochmah, <i>Yehadá</i> em Keter (NRNHY; Bahir, Zohar e o dossiê do Kav; decisão do Gatekeeper de 22/08/2026). <b>Toque num mundo, num véu ou numa alma</b> para ler o painel, com o nome em português, hebraico e aramaico e a fonte. O <b>mapa por altura</b> (Atzilut em Keter; Beriah em Chochmah e Binah; Yetzirah de Chesed a Yesod; Asiyah em Malchut) segue a imagem da Academia de Cabala que ele enviou; no Ari cada mundo contém as dez sefirot inteiras — as duas leituras coexistem e esta página declara qual desenha.</p>
+    <div class="arvore-nota" aria-label="Mundos, véus e almas: o que o desenho mostra e de onde vem">
+      <p class="ap-rot">o que está por trás da Árvore</p>
+      <div class="an-grid">
+        <div class="an-item"><b>Os quatro mundos</b><span>círculos por trás das esferas, cada um com o nome aramaico da casa, o hebraico e a letra do Nome que o chaveia</span>
+          <ul><li><i>Tibel HaPir</i> · Atzilut · <span class="heb">י</span> — em Keter</li><li><i>Tibel HaBará</i> · Beriah · <span class="heb">ה</span> — em Chochmah e Binah</li><li><i>Tibel HaYossará</i> · Yetzirah · <span class="heb">ו</span> — de Chesed a Yesod</li><li><i>Tibel HaAssá</i> · Asiyah · <span class="heb">ה</span> — em Malchut</li></ul>
+          <small>Hitlamdut fólio IV: <i>Tibel HaPir = Atziluth = Yod</i>; fólio V, as alturas de leitura</small></div>
+        <div class="an-item"><b>Os três véus</b><span>a linha tracejada entre um mundo e o seguinte: a <i>parsa</i> (<span class="heb">פרסא</span>) do Ari, a cortina que a luz atravessa coberta</span>
+          <ul><li>entre Atzilut e Beriah</li><li>entre Beriah e Yetzirah, logo abaixo de Da’at</li><li>entre Yetzirah e Asiyah</li></ul>
+          <small>Etz Chaim (Estrato B, declarado); no sistema, a declaração de altura do fólio V</small></div>
+        <div class="an-item"><b>As cinco almas</b><span>NRNHY, em itálico ao lado da esfera que a casa lhes dá</span>
+          <ul><li><i>Nafsha</i> · Nefesh — Malchut</li><li><i>Ruk’ha</i> · Ruach — <b>Zeir Anpin</b>, as seis do meio (o rótulo fica em Tiferet)</li><li><i>Nishimta</i> · Neshamah — Binah</li><li><i>Hawê</i> · Chayah — Chochmah</li><li><i>Yehadá</i> · Yechidah — Keter</li></ul>
+          <small>Bahir, Zohar e o dossiê do Kav; decisão do Gatekeeper de 22/08/2026 (fólio IV)</small></div>
+      </div>
+      <p class="an-metodo"><b>Toque</b> num mundo, num véu ou numa alma: o painel abre com o nome em português, hebraico e aramaico, e a fonte. <b>O mapa por altura</b> (cada mundo envolvendo um grupo de esferas) segue a Árvore da Academia de Cabala recebida em 13/09/2026; no Ari cada mundo contém as dez sefirot inteiras. As duas leituras coexistem, e esta página declara qual desenha.</p>
+    </div>
   </section>
 
   <h2 class="sec"><span class="n">8</span>As 22 letras <span class="eyebrow">tábua · valor · quatro escritas</span></h2>
@@ -1672,7 +1697,7 @@
 </script>
 
 <script>
-  /* Gargul v3.5.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  /* Gargul v3.5.1 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
     var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });

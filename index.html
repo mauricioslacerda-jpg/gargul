@@ -13,7 +13,7 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<script>try{var t=localStorage.getItem("roda-tema");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t);var f=localStorage.getItem("roda-fonte");if(f&&f!=="100")document.documentElement.style.fontSize=f+"%"}catch(e){}</script>
+<script>try{var t=localStorage.getItem("roda-tema");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t);var f=localStorage.getItem("roda-fonte");if(f&&f!=="100")document.documentElement.style.setProperty("--tx",f==="120"?"1.2":"1.45")}catch(e){}</script>
 <title>Gargul · Roda do Tempo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -539,7 +539,10 @@
     .tabs button { min-width: 0; overflow: hidden; }
     .tabs button span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
     .chip-data { font-size: 0.64rem; padding: 0.3rem 0.5rem; }
-    h1 { font-size: 1.2rem; flex: 0 1 auto; min-width: 0; overflow: hidden; }
+    h1 { font-size: clamp(1rem, 4.6vw, 1.2rem); flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .chip-data { flex: 0 3 auto; max-width: 9rem; }
+    .tabs button { font-size: 0.56rem; letter-spacing: 0.05em; }
+    .tabs button span { white-space: nowrap; }
     h1 .heb { display: none; }
     .menu-btn { flex: 0 0 auto; }
     .controls { width: 100%; display: flex; flex-wrap: nowrap; gap: 0.4rem; align-items: stretch; }
@@ -593,6 +596,29 @@
     .letter { grid-template-columns: auto 1fr; text-align: left; }
   }
 
+  /* ===== tamanho da letra: só o texto corrido escala (var(--tx)); cabeçalho, abas, botões, títulos e desenhos ficam ===== */
+  :root { --tx: 1; }
+  .headline { font-size: calc(var(--tx) * clamp(1.12rem, 2.2vw, 1.5rem)); }
+  .leitura dd { font-size: calc(var(--tx) * 0.98rem); }
+  .row .v, .row .v p { font-size: calc(var(--tx) * 1rem); line-height: 1.5; }
+  .row .v .glosa { font-size: calc(var(--tx) * 0.95rem); }
+  .row .v .sub { font-size: calc(var(--tx) * 0.88rem); }
+  .kohelet .t, .kohelet .note, .conv li, #kohelet p { font-size: calc(var(--tx) * 0.98rem); line-height: 1.5; }
+  .sem-card p, .sem-card li { font-size: calc(var(--tx) * 0.98rem); line-height: 1.5; }
+  .sem-card .big { font-size: calc(var(--tx) * 1.35rem); }
+  .sem-card .sub { font-size: calc(var(--tx) * 0.92rem); }
+  .anjo-row .v { font-size: calc(var(--tx) * 1rem); }
+  .ap p, .ap { font-size: calc(var(--tx) * 0.98rem); line-height: 1.5; }
+  .ap .ap-nome { font-size: calc(var(--tx) * 1.4rem); }
+  .ap-ficha dd { font-size: calc(var(--tx) * 0.95rem); }
+  .an-item > span, .an-item li, .an-metodo, .arvore-nota { font-size: calc(var(--tx) * 0.95rem); }
+  .sub-sec, .gem-nota { font-size: calc(var(--tx) * 0.95rem); }
+  .letras22 td, .letras22 .d { font-size: calc(var(--tx) * 0.95rem); }
+  .pick, .pick .sub { font-size: calc(var(--tx) * 0.98rem); }
+  .gem-termos li, .gem-termos .pt, .gem-termos .sig, .gem-eq li, .modos td, .modos td.d, .gem-rede, .gem-rede .dic li { font-size: calc(var(--tx) * 0.95rem); }
+  table.log td, .log td.t { font-size: calc(var(--tx) * 0.92rem); }
+  footer { font-size: calc(var(--tx) * 0.72rem); }
+  .conta .sub-sec, .drawer .sub-sec { font-size: calc(var(--tx) * 0.9rem); }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
@@ -1940,7 +1966,7 @@
     setTema(tema);
     /* tamanho da letra: escala o rem da raiz; desenhos seguem porque as larguras são em rem e o texto dos SVGs vive no viewBox */
     var fonte = "100"; try { fonte = localStorage.getItem("roda-fonte") || "100"; } catch (e) {}
-    function setFonte(v) { fonte = v; try { localStorage.setItem("roda-fonte", v); } catch (e) {} document.documentElement.style.fontSize = v === "100" ? "" : v + "%"; Array.prototype.forEach.call(document.querySelectorAll("#fonte button"), function (x) { x.setAttribute("aria-pressed", x.getAttribute("data-fonte") === v ? "true" : "false"); }); }
+    function setFonte(v) { fonte = v; try { localStorage.setItem("roda-fonte", v); } catch (e) {} document.documentElement.style.fontSize = ""; document.documentElement.style.setProperty("--tx", v === "100" ? "1" : (v === "120" ? "1.2" : "1.45")); Array.prototype.forEach.call(document.querySelectorAll("#fonte button"), function (x) { x.setAttribute("aria-pressed", x.getAttribute("data-fonte") === v ? "true" : "false"); }); }
     Array.prototype.forEach.call(document.querySelectorAll("#fonte button"), function (x) { x.addEventListener("click", function () { setFonte(x.getAttribute("data-fonte")); }); });
     setFonte(fonte);
     /* seções colapsáveis: cada h2.sec abre e fecha o que vem até o próximo h2.sec; estado lembrado por número */
@@ -1966,7 +1992,7 @@
 </script>
 
 <script>
-  /* Gargul v4.5.2 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
+  /* Gargul v4.6.0 — service worker: cache-first do app e das fontes; sem rede depois da 1ª visita */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").then(function (reg) { reg.update(); }).catch(function () {}); });
     var recarregou = false; navigator.serviceWorker.addEventListener("controllerchange", function () { if (recarregou) return; recarregou = true; location.reload(); });

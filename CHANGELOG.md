@@ -84,7 +84,16 @@ Datas em horário do Rio. Fontes e réguas: `specs/cabala-app/` no vault.
   versão aparece no rodapé do menu ☰.
 - **v4.8.1** — a área 2 chama-se **Gargul · a roda das 22 letras** (o astrolábio leva o nome do app).
 
-### 2026-09-16 — a Academia de Cabala entra como camada própria
+### 2026-09-16 — Adar I não dorme na Academia, Adaru 2 é Metubá · v4.9.1
+
+Correções da área 12 a partir de datas que a bancada da v4.9.0 não tinha visto (5 Tishrei era o único dia testado):
+
+- **Adar I (ano embolismal):** a linha das letras da Academia agora diz que Adaru 1 e Adaru 2 partilham Kof + Gamal, e que é a Roda (área 5) que deixa a letra de Adar I dormir. Antes as duas camadas nomeavam letra diferente para o mesmo dia sem explicar.
+- **Adaru 2:** a linha da estação mostra **Metubá** (temperada: reflexão e contração), não Chamê; vento e águas de Metubá não constam nas tábuas lidas e ficam em branco, não inventados.
+- **Autoria dos meses Bul→Adaru:** o selo diz "capítulo do mês: Anuário Sagrado (K'hardana) · tábuas gerais: livro de Mario Meir", porque face, estação, vento, águas e as 22 letras vêm do livro em todos os doze meses; só o capítulo do mês é do Anuário.
+- **Tábua das 22:** a coluna "na Academia" ganhou largura mínima (12 rem) para não quebrar em cinco linhas no celular; a tábua já rolava na horizontal antes.
+
+## 2026-09-16 — a Academia de Cabala entra como camada própria
 
 - **v4.9.0** — **área 12 · Academia de Cabala · o mês e o dia da lua** (vista Hoje, depois de Kohelet): overlay
   rotulado e não canônico, lido foto a foto em 124 fotos (95 do livro de Mario Meir, *Astrologia Cabalista: A Roda

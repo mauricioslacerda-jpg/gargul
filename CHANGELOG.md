@@ -84,15 +84,29 @@ Datas em horário do Rio. Fontes e réguas: `specs/cabala-app/` no vault.
   versão aparece no rodapé do menu ☰.
 - **v4.8.1** — a área 2 chama-se **Gargul · a roda das 22 letras** (o astrolábio leva o nome do app).
 
+### 2026-09-16 — a Academia de Cabala entra como camada própria
+
+- **v4.9.0** — **área 12 · Academia de Cabala · o mês e o dia da lua** (vista Hoje, depois de Kohelet): overlay
+  rotulado e não canônico, lido foto a foto em 124 fotos (95 do livro de Mario Meir, *Astrologia Cabalista: A Roda
+  dos Meses*; 29 do *Anuário Sagrado* de Carmem K'hardana). Por mês: nome semítico, signo em aramaico, face da
+  Shek'hiná, clã de Yashael, esfera, as letras do mês (simples do signo + dupla do planeta + mãe da estação — as sete
+  duplas batem com a Gra-Ari da Roda), estação · vento · águas, a permutação de יהוה (33×), o takam (livro) ou as
+  superações (Anuário), os 72 nomes do mês (as mesmas tríades, com *Alaha*), o salmo, o **dia na contagem da lua**
+  (o "tempo de…" de Kohelet 3 pelo dia lunar, chave nomeada ao lado do par da área 6, que segue o dia da semana) e os
+  marcos do mês (Yumá). Coluna **na Academia** na tábua das 22 (área 8). Autoria por mês (livro / Anuário / os dois);
+  fonte por campo nas notas técnicas. Em PT · EN · ES. Cinco meses (Bul a Adaru) vêm só do Anuário; esferas e
+  permutações só dos sete meses lidos no livro.
+
 ## O que fica em português por decisão
 
 Fontes e regras (área 11) e as leituras registradas no vault (área 10): língua de registro da casa. Os nomes
 das festas do Hebcal ficam em inglês (dado embutido).
 
-## Pendências abertas (13/09/2026)
+## Pendências abertas (16/09/2026)
 
 - Revisão de EN e ES por leitor nativo (a régua do meturgeman pede revisor que possa reprovar).
 - Conta/login: lugar reservado, sem backend.
 - Fontes auto-hospedadas (hoje entram no cache do service worker na primeira visita).
 - Teste dele no aparelho sem rede; conferência de três dias contra o `check_log.py`.
 - A bancada não simula largura abaixo de 504 px; telas de 412 px só por raciocínio.
+- Academia: faltam nas fotos os capítulos de Bul, Kislimu, Tebetu, Shabatu e Adaru (esfera, permutação, 72 nomes, takam do livro) e o nome aramaico de cinco signos; a tábua dos 30 dias lunares vem do Anuário, não do livro.
